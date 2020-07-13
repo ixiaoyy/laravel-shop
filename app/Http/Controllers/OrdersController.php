@@ -10,6 +10,8 @@ use Carbon\Carbon;
 
 use App\Exceptions\InvalidRequestException;
 
+use App\Jobs\CloseOrder;
+
 class OrdersController extends Controller
 {
     public function store(OrderRequest $request)
@@ -64,6 +66,8 @@ class OrdersController extends Controller
 
             return $order;
         });
+
+        $this->dispatch(new CloseOrder($order, config('app.order_ttl')));
 
         return $order;
     }
