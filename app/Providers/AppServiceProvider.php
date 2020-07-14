@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
             $config['return_url'] = route('payment.alipay.return');
             // 判断当前项目运行环境是否为线上环境
             if (app()->environment() !== 'production') {
+                $config = config('pay.wechat');
+                $config['notify_url'] = 'http://requestbin.fullcontact.com/';
                 $config['mode']         = 'dev';
                 $config['log']['level'] = Logger::DEBUG;
             } else {
