@@ -50,3 +50,4 @@ Route::get('alipay', function () {
         'subject' => 'test subject - 测试',
     ]);
 });
+Route::post('payment/wechat/refund_notify', 'PaymentController@wechatRefundNotify')->name('payment.wechat.refund_notify');
