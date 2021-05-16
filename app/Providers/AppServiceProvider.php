@@ -56,6 +56,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        if (env('IS_HTTPS') == false) {
+            \URL::forceScheme('http');
+        }
         \View::composer(['products.index', 'products.show'], \App\Http\ViewComposers\CategoryTreeComposer::class);
     }
 }
